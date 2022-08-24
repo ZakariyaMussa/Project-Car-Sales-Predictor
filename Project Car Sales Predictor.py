@@ -31,12 +31,16 @@ print("Output Data Shape=",output.shape)
 print("Input data Shape=",inputs.shape)
 #Scale input
 scaler_in = MinMaxScaler()
-input_scaled = scaler_in.fit_transform(inputs)
-print(input_scaled)
+def inputscaler():
+    input_scaled = scaler_in.fit_transform(inputs)
+    print(input_scaled)
+    return input_scaled;
 #Scale output
 scaler_out = MinMaxScaler()
-output_scaled = scaler_out.fit_transform(output)
-print(output_scaled)
+def outputscaler():
+    output_scaled = scaler_out.fit_transform(output)
+    print(output_scaled)
+    return output_scaled;
 #Create model
 model = Sequential()
 model.add(Dense(25, input_dim=5, activation='relu'))
@@ -45,7 +49,7 @@ model.add(Dense(1, activation='linear'))
 print(model.summary())
 #Train model
 model.compile(optimizer = 'adam', loss = 'mean_squared_error')
-epochs_hist = model.fit(input_scaled, output_scaled, epochs=20, batch_size=10, verbose=1, validation_split=0.2)
+epochs_hist = model.fit(inputscaler(), outputscaler(), epochs=20, batch_size=10, verbose=1, validation_split=0.2)
 print(epochs_hist.history.keys()) #print dictionary keys
 #Plot the training graph to see how quickly the model learns
 plt.plot(epochs_hist.history['loss'])
