@@ -7,6 +7,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from keras.models import Sequential
 from keras.layers import Dense
+import PySimpleGUI as sg
 
 #Import data
 data = pd.read_csv('car_sales_dataset.txt', encoding='ISO-8859-1')
@@ -73,3 +74,56 @@ print('Predicted Output (Scaled) =', output_predict_sample_scaled)
 #Unscale output
 output_predict_sample = scaler_out.inverse_transform(output_predict_sample_scaled)
 print('Predicted Output / Purchase Amount ', output_predict_sample)
+
+
+layout = [[sg.Text('Gender:'),
+           sg.Text(size=(15,1), key='-OUTPUT-')],
+            [sg.Text('gender:')],
+          [sg.Input(key='-Gender-')],
+          [sg.Text('Age:')],
+          [sg.Input(key='-Age-')],
+          [sg.Text('AnnualSalary:')],
+          [sg.Input(key='-Annual_Salary-')],
+          [sg.Text('CreditCardDebt:')],
+          [sg.Input(key='-CreditCard_Debt-')],
+          [sg.Text('NetWorthPurchaseAmount:')],
+          [sg.Input(key='-Net_Worth_Purchase_Amount-')],
+          [sg.Button('Display'), sg.Button('Exit')]]
+          
+          
+         
+
+  
+window = sg.Window('Introduction', layout)
+
+while True:
+    event, values = window.read()
+    print(event, values)
+      
+    if event in  (None, 'Exit'):
+        break
+ 
+    else: 
+     if event == 'Display':
+            Gender= float(values["-Gender-"])
+            Age= float(values["-Age-"])
+            AnnualSalary= float(values["-Annual_Salary-"])
+            CreditCardDebt= float(values["-CreditCard_Debt-"])
+            NetWorthPurchaseAmount= float(values["-Net_Worth_Purchase_Amount-"])
+            
+            input_test_sample = np.array([[Gender, Age,  AnnualSalary, CreditCardDebt, NetWorthPurchaseAmount]])
+            #input_test_sample2 = np.array([[1, 46.73, 61370.67, 9391.34, 462946.49]])
+            #Scale input test sample data
+            input_test_sample_scaled = scaler_in.transform(input_test_sample)
+            #Predict output
+            output_predict_sample_scaled = model.predict(input_test_sample_scaled)
+            #Print predicted output
+            print('Predicted Output (Scaled) =', output_predict_sample_scaled)
+            #Unscale output
+            output_predict_sample = scaler_out.inverse_transform(output_predict_sample_scaled)
+            print('Predicted Output / Purchase Amount ', output_predict_sample)
+                    # Update the "output" text element
+                    # to be the value of "input" element
+        
+           
+            sg.popup( 'Predicted Output / Purchase Amount ', output_predict_sample)
