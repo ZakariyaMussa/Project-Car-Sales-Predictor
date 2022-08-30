@@ -76,9 +76,9 @@ output_predict_sample = scaler_out.inverse_transform(output_predict_sample_scale
 print('Predicted Output / Purchase Amount ', output_predict_sample)
 
 
-layout = [[sg.Text('Gender:'),
+layout = [[sg.Text('Gender: Male=0 Female=1'),
            sg.Text(size=(15,1), key='-OUTPUT-')],
-            [sg.Text('gender:')],
+            [sg.Text('Gender:')],
           [sg.Input(key='-Gender-')],
           [sg.Text('Age:')],
           [sg.Input(key='-Age-')],
@@ -126,4 +126,5 @@ while True:
                     # to be the value of "input" element
         
            
-            sg.popup( 'Predicted Output / Purchase Amount ', output_predict_sample)
+            sg.popup ('Predicted Output / Purchase Amount ', output_predict_sample,
+                  "Gender", Gender, "Age", Age, "Annual_Salary", AnnualSalary, "CreditCard_Debt", CreditCardDebt, "Net_Worth_Purchase_Amount", NetWorthPurchaseAmount)
