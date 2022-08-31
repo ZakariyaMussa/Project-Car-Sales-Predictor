@@ -78,7 +78,7 @@ print('Predicted Output / Purchase Amount ', output_predict_sample)
 
 layout = [[sg.Text('Gender: Male=0 Female=1'),
            sg.Text(size=(15,1), key='-OUTPUT-')],
-            [sg.Text('Gender:')],
+          [sg.Text('Gender:')],
           [sg.Input(key='-Gender-')],
           [sg.Text('Age:')],
           [sg.Input(key='-Age-')],
@@ -86,8 +86,8 @@ layout = [[sg.Text('Gender: Male=0 Female=1'),
           [sg.Input(key='-Annual_Salary-')],
           [sg.Text('CreditCardDebt:')],
           [sg.Input(key='-CreditCard_Debt-')],
-          [sg.Text('NetWorthPurchaseAmount:')],
-          [sg.Input(key='-Net_Worth_Purchase_Amount-')],
+          [sg.Text('NetWorth:')],
+          [sg.Input(key='-Net_Worth-')],
           [sg.Button('Display'), sg.Button('Exit')]]
           
           
@@ -109,9 +109,10 @@ while True:
             Age= float(values["-Age-"])
             AnnualSalary= float(values["-Annual_Salary-"])
             CreditCardDebt= float(values["-CreditCard_Debt-"])
-            NetWorthPurchaseAmount= float(values["-Net_Worth_Purchase_Amount-"])
+            NetWorth=float(values["-Net_Worth-"])
+           
             
-            input_test_sample = np.array([[Gender, Age,  AnnualSalary, CreditCardDebt, NetWorthPurchaseAmount]])
+            input_test_sample = np.array([[Gender, Age,  AnnualSalary, CreditCardDebt, NetWorth]])
             #input_test_sample2 = np.array([[1, 46.73, 61370.67, 9391.34, 462946.49]])
             #Scale input test sample data
             input_test_sample_scaled = scaler_in.transform(input_test_sample)
@@ -127,4 +128,9 @@ while True:
         
            
             sg.popup ('Predicted Output / Purchase Amount ', output_predict_sample,
-                  "Gender", Gender, "Age", Age, "Annual_Salary", AnnualSalary, "CreditCard_Debt", CreditCardDebt, "Net_Worth_Purchase_Amount", NetWorthPurchaseAmount)
+                  "Gender", Gender, "Age", Age, "Annual_Salary", AnnualSalary, "CreditCard_Debt", CreditCardDebt, "Net_Worth_Purchase_Amount", NetWorth, "Net_Worth" )
+
+                  # test_with_unittest.py
+
+
+
